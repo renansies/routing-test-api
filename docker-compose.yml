@@ -1,0 +1,38 @@
+services:
+  fooapp_1:
+    image: simple-routing-app:latest
+    restart: always
+    environment:
+      - ROOT_PATH=/api/foo
+      - APP_NAME=foo
+      - DESTINATION=destination1
+    ports:
+      - 8080:80
+  fooapp_2:
+    image: simple-routing-app:latest
+    restart: always
+    environment:
+      - ROOT_PATH=/api/foo
+      - APP_NAME=foo
+      - DESTINATION=destination2
+    ports:
+      - 8081:80
+  fooapp_3:
+    image: simple-routing-app:latest
+    restart: always
+    environment:
+      - ROOT_PATH=/api/foo
+      - APP_NAME=foo
+      - DESTINATION=destination3
+    ports:
+      - 8082:80
+  barapp:
+    image: simple-routing-app:latest
+    restart: always
+    environment:
+      - ROOT_PATH=/api/bar
+      - APP_NAME=bar
+      - DESTINATION=destination1
+    ports:
+      - 8083:80
+
