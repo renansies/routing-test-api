@@ -31,22 +31,22 @@ jobs:
       run: dotnet publish -c Release -o '${{ github.workspace }}/out'
     - name: Zip Package
       run: |
-        ls -la
         cd ${{ github.workspace }}/out
         zip -r ${{ github.workspace }}/out.zip . -x '*.git*'
     - name: Configure AWS Credentials
-      id: credentials
+      id: aws-login
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::322094740524:role/gh-actions-role
         aws-region: us-east-1
         output-credentials: true
+
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v21
       with:
-        aws_access_key: ${{ steps.credentials.outputs.aws-access-key-id }}
-        aws_secret_key: ${{ steps.credentials.outputs.aws-secret-access-key }}
-        aws_session_token: ${{ steps.credentials.outputs.aws-session-token }}
+        aws_access_key: ${{ steps.aws-login.outputs.aws-access-key-id }}
+        aws_secret_key: ${{ steps.aws-login.outputs.aws-secret-access-key }}
+        aws_session_token: ${{ steps.aws-login.outputs.aws-session-token }}
         application_name: RoutingTestAPI
         environment_name: sieslabs-dev
         region: us-east-1
