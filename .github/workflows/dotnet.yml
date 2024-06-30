@@ -46,7 +46,7 @@ jobs:
         aws_access_key: ${{ steps.credentials.outputs.aws-access-key-id }}
         aws_secret_key: ${{ steps.credentials.outputs.aws-secret-access-key }}
         aws_session_token: ${{ steps.credentials.outputs.aws-session-token }}
-        application_name: routing-test-api
+        application_name: RoutingTestAPI
         environment_name: sieslabs-dev
         region: us-east-1
         version_label: ${{ github.run_id }}
