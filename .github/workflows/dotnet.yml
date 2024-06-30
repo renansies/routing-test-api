@@ -32,7 +32,7 @@ jobs:
     - name: Zip Package
       run: |
         cd ${{ github.workspace }}/out
-        zip -r ${{ github.workspace }}/out.zip . -x '*.git*'
+        zip -r ${{ github.workspace }}/deploy.zip *
     - name: Configure AWS Credentials
       id: aws-login
       uses: aws-actions/configure-aws-credentials@v4
@@ -52,5 +52,5 @@ jobs:
         region: us-east-1
         version_label: ${{ github.run_number }}
         version_description: ${{ github.sha }}
-        deployment_package: ${{ github.workspace }}/out.zip
+        deployment_package: deploy.zip
         
