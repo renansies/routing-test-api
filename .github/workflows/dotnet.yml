@@ -37,7 +37,6 @@ jobs:
       id: credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        audience: sts.amazonaws.com.cn
         role-to-assume: arn:aws:iam::322094740524:role/gh-actions-role
         aws-region: us-east-1
         output-credentials: true
