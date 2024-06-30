@@ -42,7 +42,7 @@ jobs:
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v21
       with:
-        aws_access_key: ${{ steps.credentials.outputs.aws-access-key-id }}
+        aws_access_key_id: ${{ steps.credentials.outputs.aws-access-key-id }}
         aws_secret_key: ${{ steps.credentials.outputs.aws-secret-access-key }}
         aws_session_token: ${{ steps.credentials.outputs.aws-session-token }}
         application_name: routing-test-api
