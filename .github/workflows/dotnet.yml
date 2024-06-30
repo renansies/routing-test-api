@@ -32,10 +32,15 @@ jobs:
       run: |
         cd ${{ github.workspace }}/out
         zip -r ${{ github.workspace }}/out.zip *
+    - name: Configure AWS Credentials from main account
+      uses: aws-actions/configure-aws-credentials@master
+      with:
+        role-to-assume: arn:aws:iam::322094740524:role/gh-actions-role
+        aws-region: us-east-1
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v21
       with:
-        aws_access_key: ${{ secrets. AWS_ACCESS_KEY_ID }}
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: routing-test-api
         environment_name: sieslabs-dev
