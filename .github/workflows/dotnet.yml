@@ -48,7 +48,7 @@ jobs:
         aws_secret_key: ${{ steps.aws-login.outputs.aws-secret-access-key }}
         aws_session_token: ${{ steps.aws-login.outputs.aws-session-token }}
         application_name: RoutingTestAPI
-        environment_name: RoutingTestAPI-env
+        environment_name: RoutingTestAPI-development
         region: us-east-1
         version_label: ${{ github.run_number }}
         version_description: ${{ github.sha }}
