@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
-builder.WebHost.UseUrls("http://*:80");
+builder.WebHost.UseUrls("http://*:5000");
 
 var app = builder.Build();
 
