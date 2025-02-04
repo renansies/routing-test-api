@@ -1,38 +1,68 @@
 services:
-  fooapp_1:
-    image: simple-routing-app:latest
+  fooapp_cell-1:
+    image: localhost/routing-test-api:latest
     restart: always
     environment:
       - ROOT_PATH=/api/foo
       - APP_NAME=foo
+      - CELL=cell-1
+      - ROUTE_APP=bar
       - DESTINATION=destination1
     ports:
       - 8080:80
-  fooapp_2:
-    image: simple-routing-app:latest
-    restart: always
-    environment:
-      - ROOT_PATH=/api/foo
-      - APP_NAME=foo
-      - DESTINATION=destination2
-    ports:
-      - 8081:80
-  fooapp_3:
-    image: simple-routing-app:latest
-    restart: always
-    environment:
-      - ROOT_PATH=/api/foo
-      - APP_NAME=foo
-      - DESTINATION=destination3
-    ports:
-      - 8082:80
-  barapp:
-    image: simple-routing-app:latest
+  fooapp_cell-2:
+     image: localhost/routing-test-api:latest
+     restart: always
+     environment:
+       - ROOT_PATH=/api/foo
+       - APP_NAME=foo
+       - CELL=cell-2
+       - ROUTE_APP=bar
+       - DESTINATION=destination2
+     ports:
+       - 8081:80
+  fooapp_cell-3:
+     image: localhost/routing-test-api:latest
+     restart: always
+     environment:
+       - ROOT_PATH=/api/foo
+       - APP_NAME=foo
+       - CELL=cell-3
+       - ROUTE_APP=bar
+       - DESTINATION=destination3
+     ports:
+       - 8082:80
+  barapp_cell-1:
+     image: localhost/routing-test-api:latest
+     restart: always
+     environment:
+       - ROOT_PATH=/api/bar
+       - APP_NAME=bar
+       - CELL=cell-1
+       - ROUTE_APP=foo
+       - DESTINATION=destination1
+     ports:
+       - 8083:80
+  barapp_cell-2:
+    image: localhost/routing-test-api:latest
     restart: always
     environment:
       - ROOT_PATH=/api/bar
       - APP_NAME=bar
+      - CELL=cell-2
+      - ROUTE_APP=foo
       - DESTINATION=destination1
     ports:
-      - 8083:80
+      - 8084:80
+  barapp_cell-3:
+    image: localhost/routing-test-api:latest
+    restart: always
+    environment:
+      - ROOT_PATH=/api/bar
+      - APP_NAME=bar
+      - CELL=cell-3
+      - ROUTE_APP=foo
+      - DESTINATION=destination1
+    ports:
+      - 8085:80
 
