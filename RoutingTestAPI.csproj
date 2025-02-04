@@ -19,20 +19,4 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Observability\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Observability\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Observability\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Observability\**" />
-  </ItemGroup>
-
 </Project>
