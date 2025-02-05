@@ -30,7 +30,7 @@ builder.Services.AddOpenTelemetry()
         .AddHttpClientInstrumentation()
         .AddOtlpExporter(otlpOptions =>
         {
-            otlpOptions.Endpoint = new Uri("http://opentelemetry-collector-beta.vtex.systems");
+            otlpOptions.Endpoint = new Uri("http://localhost:5000");
         })
         .AddConsoleExporter())
     .WithMetrics(metrics => metrics
