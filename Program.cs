@@ -31,11 +31,7 @@ builder.Services.AddOpenTelemetry()
         .AddOtlpExporter(otlpOptions =>
         {
             otlpOptions.Endpoint = new Uri("http://localhost:5000");
-        })
-        .AddConsoleExporter())
-    .WithMetrics(metrics => metrics
-        .AddAspNetCoreInstrumentation()
-        .AddConsoleExporter());
+        }));
 
 
 builder.WebHost.UseUrls("http://*:80");
@@ -54,7 +50,17 @@ Activity.Current?.SetTag("stack", cell);
 Activity.Current?.SetBaggage("tenant", "foo-account");
 
 app.MapGet($"{defaultPath}/hello-world", () => $"Hello World from {appName} app in cell {cell}!\n");
-app.MapGet($"{defaultPath}/simulate/status/200", () => $"Successfull request for destination {destination} from {appName} app in cell {cell}\n");
+app.MapGet(defaultPath+"/simulate/status/{status}",
+    (int status, HttpContext context) =>
+    {
+        var host = context.Request.Host.Value;
+        
+        context.Response.Headers.Host = host;
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = status;
+        context.Response.WriteAsync($"request for destination {destination} from {appName} app in cell {cell} with status {status}");
+        return Results.StatusCode(status);
+    });
 
 app.MapGet($"{defaultPath}/simulate/route/{routeApp}", async (HttpClient httpClient) =>
 {
