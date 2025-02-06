@@ -62,12 +62,13 @@ app.MapGet(defaultPath+"/simulate/status/{status}",
         return Results.StatusCode(status);
     });
 
-app.MapGet($"{defaultPath}/simulate/route/{routeApp}", async (HttpClient httpClient) =>
+app.MapGet($"{defaultPath}/simulate/route/{routeApp}", async (HttpContext context, HttpClient httpClient) =>
 {
     var redirectUrl = $"http://host.containers.internal/api/{routeApp}/simulate/status/200";
 
     try
     {
+        httpClient.DefaultRequestHeaders.Host = context.Request.Host.Host;
         var response = await httpClient.GetAsync(redirectUrl);
 
         if (!response.IsSuccessStatusCode)
